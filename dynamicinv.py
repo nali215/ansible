@@ -41,7 +41,7 @@ class ExampleInventory(object):
 # Example inventory for testing.
     def example_inventory(self):
         conn = None
-        conn = psycopg2.connect("dbname=testdb user=naveed password=adminpass")
+        conn = psycopg2.connect("host=10.10.0.50 dbname=testdb user=naveed password=adminpass")
         cur = conn.cursor()
         cur.execute('SELECT host_ip, host_type, host_name from ipadd')
         hosts = cur.fetchall()
