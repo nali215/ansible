@@ -9,7 +9,8 @@ import sys
 import argparse
 import psycopg2
 import requests
-from config import config
+from configparser import ConfigParser
+#from config import config
 
 try:
     import json
@@ -18,7 +19,6 @@ except ImportError:
 
 class ExampleInventory(object):
 # Example inventory for testing.
-
 
     def __init__(self):
         self.inventory = {}
@@ -38,12 +38,10 @@ class ExampleInventory(object):
         print (json.dumps(self.inventory))
 
 
-
 # Example inventory for testing.
     def example_inventory(self):
         conn = None
-        params = config()
-        conn = psycopg2.connect(**params)
+        conn = psycopg2.connect("dbname=testdb user=naveed password=adminpass")
         cur = conn.cursor()
         cur.execute('SELECT host_ip, host_type, host_name from ipadd')
         hosts = cur.fetchall()
@@ -95,3 +93,4 @@ class ExampleInventory(object):
 
 # Get the inventory.
 ExampleInventory()
+                                
